@@ -1,0 +1,27 @@
+
+# ifndef _NODE_IF_
+
+# include "Class.if"
+
+typedef struct Node node_t;
+typedef struct NodeClass nodeclass_t;
+
+struct Node
+{
+	const struct Object _;
+	void *_data;                           /* generic pointer to data */
+	node_t *_next;
+	node_t *_prev;
+};
+
+
+struct NodeClass
+{
+	const struct Class _;
+	void (*_show) (const node_t *);        /* display node's contents */
+};
+
+
+# define _NODE_IF_
+# endif
+

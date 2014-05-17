@@ -1,0 +1,22 @@
+
+# ifndef _A_CLASS_IF_
+
+# include "Class.if"
+
+struct A
+  {
+  	const struct Object _;                 /* class description */
+	char *_text;                           /* some data */
+  };
+
+
+struct AClass
+  {
+	const struct Class _;                  /* class AClass extends Object */
+	void (*_disp) (const void *_self);     /* function to display data */
+  };
+  
+# define _A_CLASS_IF_
+# endif
+
+

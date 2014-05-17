@@ -1,0 +1,21 @@
+#!/bin/sh
+
+if [ $# = 0 ]; then
+	echo 'a program to package (text) files in a bundle!'
+	echo 'usage: bundle file1 file2 ... > $newfile'
+	exit 0
+fi
+
+# inspired by a similar program 'bundle' featured in
+# 'The Unix Programming Environment' - Karnighan & Pike
+
+	echo "#!/bin/sh"
+	echo "#sh <this file> to unpack!"
+	echo "echo 'unpacking files ...'"
+for i in $*
+do
+	echo "echo $i 1>&2" 
+	echo "cat <<_EOF_OF_$i > $i" 
+	cat $i 
+	echo "_EOF_OF_$i" 
+done

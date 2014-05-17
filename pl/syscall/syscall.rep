@@ -1,0 +1,73 @@
+Report based on System Call count in source directory   Pg 1
+Total no of System Calls used  		      57
+
+System Call Details:
+====================
+
+No.    System Call Name                 System Call count
+---    ------------------               -----------------
+   1    uname                                                                                                                                         4
+   2    pipe                                                                                                                                          8
+   3    setsid                                                                                                                                        1
+   4    exit                                                                                                                                        296
+   5    readv                                                                                                                                         3
+   6    yield                                                                                                                                        15
+   7    kill                                                                                                                                         14
+   8    fcntl                                                                                                                                        13
+   9    getppid                                                                                                                                       4
+  10    unlink                                                                                                                                       59
+  11    rename                                                                                                                                        3
+  12    pause                                                                                                                                         1
+  13    execl                                                                                                                                         3
+  14    ulimit                                                                                                                                        1
+  15    poll                                                                                                                                         18
+  16    read                                                                                                                                        159
+  17    getuid                                                                                                                                        5
+  18    sigprocmask                                                                                                                                   5
+  19    _exit                                                                                                                                        29
+  20    write                                                                                                                                        89
+  21    exec                                                                                                                                         13
+  22    _Exit                                                                                                                                        29
+  23    ioctl                                                                                                                                        29
+  24    stat                                                                                                                                         65
+  25    mmap                                                                                                                                          6
+  26    open                                                                                                                                        173
+  27    audit                                                                                                                                         5
+  28    getpid                                                                                                                                       18
+  29    utime                                                                                                                                         2
+  30    pread                                                                                                                                         1
+  31    sigaction                                                                                                                                     4
+  32    setpgrp                                                                                                                                       3
+  33    sbrk                                                                                                                                          2
+  34    time                                                                                                                                        161
+  35    getmsg                                                                                                                                        4
+  36    nice                                                                                                                                          2
+  37    open                                                                                                                                          6
+  38    geteuid                                                                                                                                       1
+  39    putmsg                                                                                                                                      141
+  40    close                                                                                                                                       282
+  41    execvp                                                                                                                                        2
+  42    setitimer                                                                                                                                     1
+  43    fstat                                                                                                                                        16
+  44    getgroups                                                                                                                                     3
+  45    link                                                                                                                                         87
+  46    brk                                                                                                                                           6
+  47    sync                                                                                                                                         43
+  48    access                                                                                                                                       22
+  49    lseek                                                                                                                                        22
+  50    chmod                                                                                                                                         2
+  51    munmap                                                                                                                                        1
+  52    getegid                                                                                                                                       2
+Report based on System Call count in source directory   Pg 2
+Total no of System Calls used  		      57
+
+System Call Details:
+====================
+
+No.    System Call Name                 System Call count
+---    ------------------               -----------------
+  53    getgid                                                                                                                                        2
+  54    fork                                                                                                                                         32
+  55    chdir                                                                                                                                         2
+  56    umask                                                                                                                                         2
+  57    times                                                                                                                                         1

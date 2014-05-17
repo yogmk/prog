@@ -1,0 +1,32 @@
+/**
+ *  Hidden Interface for Object
+ */
+
+# ifndef OBJECT_IF_
+
+# include <stdio.h>
+# include <stdarg.h>
+
+struct Object
+  {
+  	const struct Class *_class;         /* object's vptr to type description */
+  };
+
+
+struct Class
+  {
+  	const struct Object _;             /* Class's description */
+	const char *_name;                 /* Class's name */
+	const struct Class *_super;        /* pointer to super-class descriptor */
+	size_t _size;                      /* Class's object's size */
+
+	void * (*_ctor) (void *self, va_list *app);
+	void * (*_dtor) (void *self);
+	int (*_differ) (const void *self, const void *other);
+	int (*_put_o) (const void *, FILE *);
+  };
+
+	
+# define OBJECT_IF_
+# endif
+

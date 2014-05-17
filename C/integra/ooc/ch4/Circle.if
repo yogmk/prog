@@ -1,0 +1,16 @@
+/** 
+ *  Interface definition for Circle ADT
+ */
+
+# ifndef _CIRCLE_IF_
+
+# include "Point.if"
+
+struct Circle
+  {
+  	const struct Point _;        /** class Circle inherits Point */
+	int rd;
+  };
+
+# define _CIRCLE_IF_
+# endif

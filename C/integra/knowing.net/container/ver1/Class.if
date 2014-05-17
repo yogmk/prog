@@ -1,0 +1,15 @@
+# ifndef _CLASS_IF_
+
+# include <stdarg.h>
+# include <stddef.h>
+
+struct Class
+  {
+    size_t _size;
+	char *_name;
+	void * (*_ctor) (void *_self, va_list *app);
+	void * (*_dtor) (void *_self);
+  };
+
+# define _CLASS_IF_
+# endif

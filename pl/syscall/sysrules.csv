@@ -1,0 +1,226 @@
+access,File - Access control,Available / No Change,Easy
+acct,Accounting,Available / No Change,Easy
+acl,File - Access control,Available with changes,Moderate
+auditon,Audit,Not Available,complex
+auditsvc,Audit,Not Available,complex
+audit,Audit,Not Available,complex
+alarm,Misc,Available / No Change,Easy
+brk,Memory,Available / No Change,Easy
+adjtime,TIME,Available with changes,Moderate
+chdir,ADMINISTRATIVE,Available with changes,Moderate
+chmod,File - Access control,Available / No Change,Easy
+chown,File - Access control,Available / No Change,Easy
+chroot,ADMINISTRATIVE,Available / No Change,Easy
+close,File,Available / No Change,Easy
+open ,File,Available / No Change,Easy
+creat,File,Available / No Change,Easy
+exec,Process,Available / No Change,Easy
+dup ,IPC,Available / No Change,Easy
+dup2,IPC,Available / No Change,Easy
+execl,Process,Available / No Change,Easy
+execle,Process,Available / No Change,Easy
+execlp,Process,Available / No Change,Easy
+execv,Process,Available / No Change,Easy
+execve,Process,Available / No Change,Easy
+execvp,Process,Available / No Change,Easy
+_Exit,Process,Available / No Change,Easy
+_exit,Process,Available / No Change,Easy
+exit,Process,Available / No Change,Easy
+faccesat,Process,Available with changes,Moderate
+acl,File - Access control,Equivalent is available,Moderate
+fchdir,ADMINISTRATIVE,Available / No Change,Easy
+fchmod,File - Access control,Available / No Change,Easy
+fchown,File - Access control,Available / No Change,Easy
+fchownat,File - Access control,Available / No Change,Easy
+fchroot,ADMINISTRATIVE,Available with changes,Moderate
+fcntl,File,Available / No Change,Easy
+fgetlabel,File,Not Available,complex
+fork1,Process,Equivalent is available,Moderate
+fork,Process,Available / No Change,Easy
+forkall,Process,Equivalent is available,Moderate
+forkallx,Process,Equivalent is available,Moderate
+forkx,Process,Equivalent is available,Moderate
+fpathconf,File,Available with changes,Moderate
+fstat,File,Available with changes,Easy
+fstatat,File,Available / No Change,Easy
+fstatvfs,ADMINISTRATIVE,Available with changes,Moderate
+futimens,File,Available / No Change,Easy
+futimesat,File - Access control,Available with changes,Moderate
+getacct,Accounting,Equivalent is available,Moderate
+getaudit,Audit,Not Available,
+getaudit_addr,Audit,Not Available,complex
+getauid,Audit,Not Available,complex
+getcontext,Process,Available / No Change,Easy
+getdents,File,Available with changes,Moderate
+getegid,Process,Available / No Change,Easy
+geteuid,Process,Available / No Change,Easy
+getgid,Process,Available / No Change,Easy
+getgroups,File - Access control,Available with changes,Moderate
+getisax,MISC,Not Available,complex
+getitimer,TIME,Available / No Change,Easy
+getlabel,misc,Not Available,complex
+getmsg,message Stream,Available / No Change,Moderate
+getpflags,process,Not Available,complex
+getpgid,process,Available / No Change,Easy
+getpgrp,process,Available / No Change,Easy
+getpid,process,Available / No Change,Easy
+getpmsg,message Stream,Available / No Change,Moderate
+getppid,process,Available / No Change,Easy
+getppriv,misc,Not Available,complex
+getprojid,process,Not Available,complex
+getrctl,MISC,Not Available,complex
+getrlimit,MISC,Available / No Change,Easy
+getsid,process,Available / No Change,Easy
+gettaskid,process,Not Available,complex
+getuid,Process,Available / No Change,Easy
+getustack,LWP,Not Available,complex
+ioctl,File,Available with changes,Moderate
+issetugid,process,Not Available,complex
+kill,process,Available / No Change,Easy
+lchown,File - Access control,Available / No Change,Easy
+link,File,Available / No Change,
+llseek,File,Available with changes,Moderate
+lseek,File,Available / No Change,
+lstat,File,Available with changes,
+_lpw_cond_broadcast,LWP,Equivalent is available,Moderate
+_lwp_cond_reltimedwait,LWP,Not available,
+_lwp_cond_signal,LWP,Not available,
+_lwp_cond_timedwait,LWP,Not available,
+_lwp_cond_wait,LWP,Not available,
+_lwp_continue,LWP,Not available,
+_lwp_info,LWP,Not available,
+_lwp_kill,LWP,Equivalent is available,Moderate
+_lwp_mutex_lock,LWP,Not available,
+_lwp_mutex_trylock,LWP,Not available,
+_lwp_mutex_unlock,LWP,Not available,
+_lwp_self,LWP,Not available,
+_lwp_sema_init,LWP,Equivalent is available,Moderate
+_lwp_sema_post,LWP,Equivalent is available,Moderate
+_lwp_sema_trywait,LWP,Equivalent is available,Moderate
+_lwp_sema_wait,LWP,Equivalent is available,Moderate
+_lwp_suspend,LWP,Not available,
+memcntl,Memory,Equivalent is available,Moderate
+meminfo,Memory,Not available,
+mincore,Memory,Available / No Change,
+mkdir,ADMINISTRATIVE,Available with changes,
+mknod,ADMINISTRATIVE,Available with changes,
+mmap,Memory,Available with changes,
+mmapobj,Memory,Not available,
+mount,ADMINISTRATIVE,Available with changes,
+mprotect,memory,Available / No Change,Easy
+msgctl,Message Stream,Available / No change,Easy
+msgget,Message Stream,Available / No change,Easy
+msgids,Message Stream,Not Available,complex
+msgrcv,Message Stream,Available / No change,Easy
+msgsnap,Message Stream,Not Available,complex
+msgsnd,Message Stream,Available / No change,Easy
+munmap,memory,Available / No change,Easy
+nice,Process,Available / No change,Easy
+ntp_adjtime,TIME,Not Available,complex
+ntp_gettime,TIME,Not Available,complex
+open,File,Available / No change,Easy
+openat,File,Available / No change,Easy
+pathconf,File,Available / No change,Easy
+pause,process,Available / No change,Easy
+pcsample,Misc,Not Available,complex
+pipe,IPC,Available / No change,Easy
+poll,File,Available / No change,Easy
+p_online,Misc,Not Available,complex
+pread,IPC,Available / No change,Easy
+priocntl,process,Not Available,complex
+priocntlset,process,Not Available,complex
+processor_bind,process,Not Available,complex
+processor_info,ADMINISTRATIVE,Not Available,complex
+profil,Misc,Available with changes,Moderate
+pset_assign,process,Not Available,complex
+pset_bind,process,Not Available,complex
+pset_create,Process,Available with changes,Moderate
+pset_destroy,Process,Available with changes,Moderate
+pset_getattr,Process,Not Available,complex
+pset_info,Process,Not Available,complex
+pset_list,Process,Not Available,complex
+pset_setattr,Process,Not Available,complex
+putacct,Accounting,Not Available,complex
+putmsg,Message Stream,Not Available,complex
+putpmsg,Message Stream,Not Available,complex
+pwrite,File,Available / No Change,Easy
+read,File,Available / No Change,Easy
+readlink,File,Available / No Change,Easy
+readv,File,Available / No Change,Easy
+rename,File,Available / No Change,Easy
+renameat,File,Available / No Change,Easy
+resolvepath,Misc,Not Available,complex
+rmdir,ADMINISTRATIVE,Available / No Change,Easy
+sbrk,Memory,Available / No Change,Easy
+semctl,Misc,Available / No Change,Easy
+semget,IPC,Available with changes,Moderate
+semids,IPC,Not Available,complex
+semop,IPC,Available / No Change,Easy
+semtimedop,Process,Available / No Change,Easy
+setaudit,Audit,Not Available,complex
+setaudit_addr,Audit,Not Available,complex
+setauid,Audit,Not Available,complex
+setcontext,misc,Available / No Change,Easy
+setegid,Process,Available / No Change,Easy
+seteuid,Process,Available / No Change,Easy
+setgid,Process,Available / No Change,Easy
+setgroups,Process,Available with changes,Moderate
+setitimer,Process,Available / No Change,Easy
+setpflags,Process,Not Available,complex
+setpgid,Process,Available with changes,Moderate
+setpgrp,Process,Available with changes,Moderate
+setppriv,Misc,Not Available,complex
+setrctl,Misc,Not Available,complex
+setregid,Process,Available with changes,Moderate
+setreuid,Process,Available with changes,Moderate
+setrlimit,Process,Available with changes,Moderate
+setsid,Process,Available with changes,Moderate
+settaskid,process,Not Available,complex
+setuid,Process,Available / No Change,Easy
+setustack,LWP,Not Available,complex
+shmat,Shared memory,Available / No Change,Easy
+shmctl,Shared memory,Available with changes,Moderate
+shmdt,Shared memory,Available / No Change,Easy
+shmget,Shared memory,Available with changes,Moderate
+shmids,Shared memory,Not Available,complex
+shmop,Shared memory,Available / No Change,Easy
+sigaction,Signal,Available / No Change,Easy
+sigaltstack,Signal,Available / No Change,Easy
+sigpending,Signal,Available / No Change,Easy
+sigprocmask,Signal,Available / No Change,Easy
+sigsend,Signal,Not Available,complex
+sigsendset,Signal,Not Available,complex
+sigsuspend,Signal,Available / No Change,Easy
+sigwait,Signal,Available / No Change,Easy
+__sparc_utrap_install,Misc,Not Available,complex
+stat,File,Available / No Change,Easy
+statvfs,ADMINISTRATIVE,Available with changes,Moderate
+stime,TIME,Available with changes,Moderate
+swapctl,Misc,Not Available,complex
+symlink,ADMINISTRATIVE,Available / No Change,Easy
+sync,Misc,Available / No Change,Easy
+sysfs,ADMINISTRATIVE,Available / No Change,Easy
+sysinfo,ADMINISTRATIVE,Available with changes,Moderate
+time,TIME,Available with changes,Moderate
+times,TIME,Available with changes,Moderate
+uadmin,ADMINISTRATIVE,Not Available,complex
+ulimit,ADMINISTRATIVE,Available / No Change,Easy
+umask,ADMINISTRATIVE,Available / No Change,Easy
+umount,ADMINISTRATIVE,Available / No Change,Easy
+umount2,ADMINISTRATIVE,Available / No Change,Easy
+uname,ADMINISTRATIVE,Available / No Change,Easy
+unlink,ADMINISTRATIVE,Available / No Change,Easy
+unlinkat,ADMINISTRATIVE,Available with changes,Moderate
+ustat,ADMINISTRATIVE,Available with changes,Moderate
+utime,File - Access control,Available / No Change,Easy
+utimensat,Misc,Available / No Change,Easy
+utimes,File - Access control,Available with changes,Moderate
+uucopy,Memory,Available with changes,Moderate
+vfork,process,Available / No Change,Easy
+vforkx,process,Not Available,complex
+vhangup,Misc,Available / No Change,Moderate
+waitid,Process,Available / No Change,Easy
+wracct,process,Available / No Change,Easy
+write,File,Available / No Change,Easy
+writev,File,Available / No Change,Easy
+yield,process,Available / No Change,Moderate

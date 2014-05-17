@@ -1,0 +1,65 @@
+require "rubygems"
+require "win32ole"
+
+    data=[['TI0739-EUIT-MARS/RPACS[CLOSED]',1],['TI0739-EUIT-MARS/RPACS[RESOLVD]', 17],['TI0739-EUIT-MARS/RPACS[TOTAL]',30],['TI0739-INTG-MARS/RPACS[CLOSED]',26],['TI0739-INTG-MARS/RPACS[RESOLVD]',63],['TI0739-INTG-MARS/RPACS[TOTAL]',105],['TI0739-MIGR-CABS[CLOSED]',5],['TI0739-MIGR-CABS[TOTAL]',9],['TI0739-MIGR-MARS/RPACS[CLOSED]',44],['TI0739-MIGR-MARS/RPACS[TOTAL]',53],['TI0739-MIGR-PARS/Focus[CLOSED]',0],['TI0739-MIGR-PARS/Focus[TOTAL]',0],['TI0739-MIGR-SABRE[CLOSED]',91],['TI0739-MIGR-SABRE[TOTAL]', 114]]
+
+    xl = WIN32OLE.new('Excel.Application')
+
+    xl.visible = 1
+    begin
+        #wb = xl.Workbooks.Add
+        #wb= xl.Workbooks.Open('v:\analysis\sabre\status-and-jira.xls')
+        wb= xl.Workbooks.Open('c:\home\ymk\prog\rb\xl-JIRA.xls')
+    
+    rescue
+        p "Open () errored. Is the FIle already open? Close & run again"
+#    ensure
+#        wb.close
+#        xl.Quit
+    end
+    
+    #ws = wb.Worksheets(1)
+    ws= wb.Worksheets("JIRA summary")
+
+    #ws.name = 'JIRA summary'
+
+    data.each do | row|  
+      case row[0].to_s
+        when /MIGR-CABS.*TAL/
+          ws.Range("P9").Value = row[1].to_s
+        when /MIGR-CABS.*SED/
+          ws.Range("Q9").Value = row[1].to_s
+        when /MIGR-SABRE.*TAL/
+          ws.Range("P8").Value = row[1].to_s
+        when /MIGR-SABRE.*SED/
+          ws.Range("Q8").Value = row[1].to_s
+        when /MIGR-MARS.*TAL/
+          ws.Range("P7").Value = row[1].to_s
+        when /MIGR-MARS.*SED/
+          ws.Range("Q7").Value = row[1].to_s
+        when /INTG-MARS.*TAL/
+          ws.Range("S7").Value = row[1].to_s
+        when /INTG-MARS.*SED/
+          ws.Range("T7").Value = row[1].to_s
+        when /INTG-MARS.*LVD/
+          ws.Range("u7").Value = row[1].to_s
+        when /EUIT-MARS.*TAL/
+          ws.Range("w7").Value = row[1].to_s
+        when /EUIT-MARS.*SED/
+          ws.Range("x7").Value = row[1].to_s
+        when /EUIT-MARS.*LVD/
+          ws.Range("Y7").Value = row[1].to_s
+      end
+    end
+
+    ws.Range("P5:y5").Merge
+    ws.Range("P5:y5").FormulaR1C1 = "JIRAs raised and REsolved"
+    ws.Range("P5:Y5").HorizontalAlignment = -4108
+
+    #wb.SaveAs('c:\home\ymk\prog\rb\xl-JIRA.xls')
+    wb.Save
+
+    wb.close
+
+    xl.Quit
+    data=nil

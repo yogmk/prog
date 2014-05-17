@@ -1,0 +1,21 @@
+# ifndef _POINT_IF_
+
+# include "Object.if"
+
+struct Point
+  {
+  	const struct Object _;             /* class Point inherits Object */
+	int _x;
+	int _y;
+  };
+
+void super_draw (const void *_class, const void *_self);
+
+struct PointClass
+  {
+  	const struct Class _;              /* class PointClass inherits Class */
+	void (*_draw) (const void *);
+  };
+
+# define _POINT_IF_
+# endif

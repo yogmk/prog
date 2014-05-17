@@ -1,0 +1,23 @@
+
+# ifndef _CLASS_B_IF_
+
+# include "A.if"
+
+struct B
+  {
+  	const struct A _;               /* class B inherits A */
+	char *_btxt;                    /* data */
+  };
+
+
+struct BClass
+{
+    const struct AClass _;                      /* BClass inherits AClass */ 
+	void (*_display) (void *_self); 
+};
+
+
+# define _CLASS_B_IF_
+# endif
+
+

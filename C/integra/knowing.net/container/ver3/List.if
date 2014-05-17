@@ -1,0 +1,33 @@
+/**
+ *  List acts as a container, and ListClass its class descriptor 
+ *  List contains a chain of 'Nodes'. Actual node is defined in Node.if
+ */
+
+# ifndef _LIST_IF_
+
+# include "Class.if"
+# include "Node.if"
+
+typedef struct List list_t;
+typedef struct ListClass listclass_t;
+
+struct List
+{
+	const struct Object _;
+	size_t _size;
+	node_t *_head;
+};
+
+
+struct ListClass
+{
+	const struct Class  _;
+	void (*_add)   (list_t *, void *);
+	void (*_del)   (list_t *);
+	void* (*_head) (list_t *);
+	void* (*_isEmpty) (list_t *);
+};
+
+
+# define _LIST_IF_
+# endif

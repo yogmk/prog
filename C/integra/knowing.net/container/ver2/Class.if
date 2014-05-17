@@ -1,0 +1,47 @@
+
+/**
+ * The scheme: 
+ * We separate Classes and Objects. Instances of struct Object hold only data,
+ * whereas struct Class holds the functions (function pointers actually) that 
+ * operate on the Object data. 
+ * And we ensure that Class is always Singleton (only one instance of struct Class 
+ * or its subClass/s exists in the application. (Naturally there is no reason why 
+ * we should hold multiple instances of function pointers to same functions, 
+ * wheras data has to be separate per each Object)
+ *
+ */
+
+# ifndef _CLASS_IF_
+
+# include <stddef.h>
+# include <stdarg.h>
+
+/**
+ * Every object in the application inherits this base object
+ * i.e. one *always* has Object as its first member
+ */
+
+struct Object
+  {
+  	const struct Class *_vtbl;           /* pointer to Class descriptor/vtable */
+  };
+
+
+/**
+ * This defines a data type/class description.
+ * All user defined Classes extend this class.
+ * It is actually nothing but a list of function pointers (vTable).
+ */
+
+struct Class
+  {
+    const struct Object _;               /* Object is always first member of every class */
+    char *_name;
+    size_t _size;
+    const struct Class * _super;         /* Pointer to superclass vTble/descriptor */
+    void * (*_ctor) (void *_self, va_list *app);
+    void * (*_dtor) (void *_self);
+  };
+
+# define _CLASS_IF_
+# endif

@@ -1,0 +1,12 @@
+/*
+   hoc ver. 2.0: a basic calculator program from the book"
+   \"Unix Programming Environment\"  - Karnighan and Pike.
+   supports:
+   --------
+   operators '+', '-', '*', '/' and unary '-', and 
+   also '%' and unary '+' as per exercise 8.2.
+   
+   varibale names 'a'..'z', and some defense against errors.
+   also facility to remember last computed result (ex 8.3) and 
+   ';' to be used as expr terminator in additon to '\n'(8.4)
+ */

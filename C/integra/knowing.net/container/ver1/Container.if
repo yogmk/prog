@@ -1,0 +1,19 @@
+
+/**
+ *  Interface declaration for ADT Container
+ */
+# ifndef _CONTAINER_IF_
+
+struct Container
+  {
+  	const void *_class;                          /* descriptor */
+	int _count;
+	const struct Class *_obj_class;                    /* type of objects held */
+	void *_list;                                 /* things that Container holds */
+	int (*_add) (void*_self, void *_object);
+	int (*_del) (void*_self, void *_object);
+	const struct Class * (*_typ) (const void*_self);
+  };
+
+# define _CONTAINER_IF_
+# endif

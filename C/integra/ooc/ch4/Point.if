@@ -1,0 +1,17 @@
+/**
+ *  Declaration of Point class's interface.
+ */
+
+# ifndef _POINT_IF_
+
+
+struct Point
+  {
+  	const void *_class;
+	int x, y;
+  };
+
+
+# define _POINT_IF_
+# endif
+  

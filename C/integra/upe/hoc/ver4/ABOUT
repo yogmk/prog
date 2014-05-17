@@ -1,0 +1,18 @@
+/*
+ * hoc ver. 4.0: a basic calculator program from the book 
+ * \"Unix Programming Environment\"  - Karnighan and Pike.
+ *
+ * ver 4.0 has same functionality as ver 3.0, but internally
+ * it is implemented as a stack machine'.
+ *
+ * supports:
+ * Operators '+', '-', '*', '/' and unary '-', and 
+ * also '%' and unary '+' as per exercise 8.2.
+ * Varibale names 'a'..'z', and some defense against errors.
+ * Exponentiation operator '^', arbitrary variable names. This
+ * version also has a 'lex' version of main and make file. We
+ * also have added the functionality as per exercises, viz. 
+ * rand () and atan2 ( ) (8.6), prevent assignment to constants
+ * (8.5) and execute unix shell commands from within hoc (8.7)
+ */
+

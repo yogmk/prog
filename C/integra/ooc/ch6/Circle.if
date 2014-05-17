@@ -1,0 +1,12 @@
+# ifndef _CIRCLE_IF_
+
+# include "Point.if"
+
+struct Circle
+  {
+  	const struct Point _;
+	int _radius;
+  };
+
+# define _CIRCLE_IF
+# endif
