@@ -18,7 +18,7 @@
        MOVE LENGTH OF <1> TO TPFILOG-REC-LENGTH \n
        PERFORM W000-WRITE-TP-LOG\n
    END-IF\n \n
-   MOVE WS-RESP-CD TO RTNCD\n",
+   MOVE WS-RESP-CD TO <4>\n",
   "cpybk" : 2
   },
 "TPFIAD" : { 
@@ -40,7 +40,7 @@
        MOVE LENGTH OF <1> TO TPFILOG-REC-LENGTH \n
        PERFORM W000-WRITE-TP-LOG\n
    END-IF\n \n
-   MOVE WS-RESP-CD TO RTN-CODE\n",
+   MOVE WS-RESP-CD TO <4>\n",
   "cpybk" : 2
   },
 "DISKREAD" : {
@@ -54,7 +54,7 @@
        RESP(WS-RESP)\n
    END-EXEC\n\n
    PERFORM R0000-RESP-CODE-MAP-ONL\n
-   MOVE WS-RESP-CD TO RTN-CODE\n\n",
+   MOVE WS-RESP-CD TO <4>\n\n",
   "cpybk" : 1
   },
 "TPFIRD" : {
@@ -68,14 +68,14 @@
        RESP(WS-RESP)\n
    END-EXEC\n\n
    PERFORM R0000-RESP-CODE-MAP-ONL\n
-   MOVE WS-RESP-CD TO RTN-CODE\n",
+   MOVE WS-RESP-CD TO <4>\n",
   "cpybk" : 1
 },
 "RDNXTDAT" : {
   "ws_cb" : null,
   "ws05" : 2,
   "procdiv" : "
-   IF NOT STARTBR-FILID-CTL \n
+   IF NOT STARTBR-<3> \n
      EXEC CICS STARTBR\n
          FILE(<3>)\n
          RIDFLD(<2>)\n
@@ -84,9 +84,9 @@
      END-EXEC\n\n
      PERFORM R0000-RESP-CODE-MAP-ONL\n\n
      IF WS-RESP = DFHRESP(NORMAL)\n
-       SET STARTBR-FILID-CTL  TO TRUE\n
+       SET STARTBR-<3>  TO TRUE\n
      END-IF\n\n
-     MOVE WS-RESP-CD TO RTNCD-CTL\n
+     MOVE WS-RESP-CD TO <4>\n
    END-IF\n\n
    EXEC CICS READNEXT\n
        FILE(<3>)\n
@@ -95,13 +95,19 @@
        RESP(WS-RESP)\n
    END-EXEC\n \n
    PERFORM R0000-RESP-CODE-MAP-ONL\n\n
-   MOVE WS-RESP-CD TO RTNCD-CTL\n\n
-   IF RTNCD-CTL NOT EQUAL 0 AND +3\n
+   MOVE WS-RESP-CD TO <4>\n\n
+   IF WS-RESP = DFHRESP(NORMAL)\n
+      IF <2> NE <2>-PREV\n
+         MOVE +3 TO <4> \n
+      END-IF\n
+      MOVE <2> TO <2>-PREV\n
+   END-IF\n\n
+   IF <4> NOT EQUAL 0 AND +3\n
      EXEC CICS ENDBR\n
          FILE(<3>)\n
          RESP(WS-RESP)\n
      END-EXEC\n\n
-     SET ENDBR-FILID-CTL TO TRUE\n
+     SET ENDBR-<3> TO TRUE\n
    END-IF\n\n",
   "cpybk" : 1
  },
@@ -109,7 +115,7 @@
   "ws_cb" : null,
   "ws05" : 3,
   "procdiv" : "
-   IF NOT STARTBR-FILE-ID \n
+   IF NOT STARTBR-<3> \n
        EXEC CICS STARTBR\n
          FILE(<3>)\n
          RIDFLD(<2>)\n
@@ -118,9 +124,9 @@
        END-EXEC\n\n
        PERFORM R000-RESP-CODE-MAP-ONL\n\n
        IF WS-RESP = DFHRESP(NORMAL)\n
-           SET STARTBR-FILE-ID TO TRUE\n\n
+           SET STARTBR-<3> TO TRUE\n\n
        END-IF\n\n
-       MOVE WS-RESP-CD TO RTN-CODE\n\n
+       MOVE WS-RESP-CD TO <4>\n\n
    END-IF\n\n
    EXEC CICS READNEXT\n
        FILE(<3>)\n
@@ -129,13 +135,19 @@
        RESP(WS-RESP)\n
    END-EXEC\n \n
    PERFORM R000-RESP-CODE-MAP-ONL\n \n
-   MOVE WS-RESP-CD TO RTN-CODE\n \n
-   IF RTN-CODE NOT EQUAL 0 AND +3\n
+   MOVE WS-RESP-CD TO <4>\n \n
+   IF WS-RESP = DFHRESP(NORMAL) \n
+      IF <2> NE <2>-PREV \n
+         MOVE +3 TO <4> \n
+      END-IF\n
+      MOVE <2> TO <2>-PREV\n
+   END-IF\n\n
+   IF <4> NOT EQUAL 0 AND +3\n
        EXEC CICS ENDBR\n
            FILE(<3>)\n
            RESP(WS-RESP)\n
        END-EXEC\n \n
-       SET ENDBR-FILE-ID TO TRUE\n
+       SET ENDBR-<3> TO TRUE\n
    END-IF \n\n",
   "cpybk" : 1
  },
@@ -143,7 +155,7 @@
   "ws_cb" : null,
   "ws05" : 4,
   "procdiv" : "
-   IF NOT STARTBR-TH-FILE-NAME \n
+   IF NOT STARTBR-<3> \n
       EXEC CICS STARTBR\n
         FILE(<3>)\n
         RIDFLD(<2>)\n
@@ -152,9 +164,9 @@
       END-EXEC\n \n
       PERFORM R000-RESP-CODE-MAP-ONL\n \n
       IF WS-RESP = DFHRESP(NORMAL)\n
-        SET STARTBR-TH-FILE-NAME TO TRUE\n
+        SET STARTBR-<3> TO TRUE\n
       END-IF\n \n
-      MOVE WS-RESP-CD TO RTN-CODE\n \n
+      MOVE WS-RESP-CD TO <4>\n \n
    END-IF\n \n
    EXEC CICS READPREV\n
        FILE(<3>)\n
@@ -163,13 +175,19 @@
        RESP(WS-RESP)\n
    END-EXEC\n \n
    PERFORM R000-RESP-CODE-MAP-ONL\n
-   MOVE WS-RESP-CD TO RTN-CODE\n \n
-   IF RTN-CODE NOT EQUAL 0 AND +3\n
+   MOVE WS-RESP-CD TO <4>\n \n
+   IF WS-RESP = DFHRESP(NORMAL)\n
+      IF <2> NE <2>-PREV \n
+         MOVE +3 TO <4>\n
+      END-IF\n
+      MOVE <2> TO <2>-PREV\n
+   END-IF\n\n
+   IF <4> NOT EQUAL 0 AND +3\n
      EXEC CICS ENDBR\n
          FILE(<3>)\n
          RESP(WS-RESP)\n
      END-EXEC\n \n
-     SET ENDBR-TH-FILE-NAME TO TRUE\n
+     SET ENDBR-<3> TO TRUE\n
    END-IF \n\n",
   "cpybk" : 1
  },
@@ -185,11 +203,13 @@
    PERFORM R0000-RESP-CODE-MAP-ONL\n
    IF WS-RESP = DFHRESP(NORMAL)\n
       MOVE <3> TO TPFILOG-FILE-ID\n
-      MOVE EXISTING-INS-RECORD TO TPFILOG-FILE-DATA\n
-      MOVE LENGTH OF EXISTING-INS-RECORD TO TPFILOG-REC-LENGTH\n
+      MOVE <2> TO TPFILOG-FILE-KEY\n
+      MOVE \"Y\" TO TPFILOG-RELEASE-REQ\n
+      MOVE <1> TO TPFILOG-FILE-DATA\n
+      MOVE LENGTH OF <1> TO TPFILOG-REC-LENGTH\n
       PERFORM W000-WRITE-TP-LOG\n
    END-IF\n\n
-   MOVE WS-RESP-CD TO RTNCD-CTL\n",
+   MOVE WS-RESP-CD TO <4>\n",
   "cpybk" : 2
  },
 "TPFIRDD" : {
@@ -204,11 +224,13 @@
    PERFORM R0000-RESP-CODE-MAP-ONL\n
    IF WS-RESP = DFHRESP(NORMAL)\n
       MOVE <3> TO TPFILOG-FILE-ID\n
-      MOVE CCF-RECORD  TO TPFILOG-FILE-DATA\n
-      MOVE LENGTH OF CCF-RECORD TO TPFILOG-REC-LENGTH \n
+      MOVE <2> TO TPFILOG-FILE-KEY\n
+      MOVE \"Y\" TO TPFILOG-RELEASE-REQ\n
+      MOVE <1>  TO TPFILOG-FILE-DATA\n
+      MOVE LENGTH OF <1> TO TPFILOG-REC-LENGTH \n
       PERFORM W000-WRITE-TP-LOG\n
    END-IF\n\n
-   MOVE WS-RTN-CODE TO RTNCD-CTL\n",
+   MOVE WS-RTN-CODE TO <4>\n",
   "cpybk" : 2
  },
 "DISKUP" : {
@@ -224,22 +246,13 @@
    PERFORM R0000-RESP-CODE-MAP-ONL\n
    IF WS-RESP = DFHRESP(NORMAL)\n
      MOVE <3> TO TPFILOG-FILE-ID\n
+     MOVE <2> TO TPFILOG-FILE-KEY\n
+     MOVE \"Y\" TO TPFILOG-RELEASE-REQ\n
      MOVE <1> TO TPFILOG-FILE-DATA\n
      MOVE LENGTH OF <1> TO TPFILOG-REC-LENGTH \n
      PERFORM W000-WRITE-TP-LOG\n
    END-IF\n\n
-   IF WS-RESP = DFHRESP(NORMAL)\n
-       MOVE <2> TO TPFIRLKY-FILE-KEY\n
-       MOVE <3> TO TPFIRLKY-FILE-ID\n\n
-       EXEC CICS LINK\n
-           PROGRAM(TPFIRLKY)\n
-           COMMAREA(TPFIRLKY-AREA)\n
-           LENGTH(LENGTH OF TPFIRLKY-AREA)\n
-           RESP(WS-RESP)\n
-       END-EXEC\n \n
-       PERFORM R000-RESP-CODE-MAP-ONL \n\n
-   END-IF\n\n
-   MOVE WS-RESP-CD TO RTNCD-CTL\n",
+   MOVE WS-RESP-CD TO <4>\n",
   "cpybk" : 2
  },
 "TPFIUP" : {
@@ -255,22 +268,13 @@
    PERFORM R0000-RESP-CODE-MAP-ONL\n
    IF WS-RESP = DFHRESP(NORMAL)\n
       MOVE <3> TO TPFILOG-FILE-ID\n
+      MOVE <2> TO TPFILOG-FILE-KEY\n
+      MOVE \"Y\" TO TPFILOG-RELEASE-REQ\n
       MOVE <1> TO TPFILOG-FILE-DATA\n
       MOVE LENGTH OF <1> TO TPFILOG-REC-LENGTH \n
       PERFORM W000-WRITE-TP-LOG\n
    END-IF\n\n
-   IF WS-RESP = DFHRESP(NORMAL)\n
-     MOVE <2> TO TPFIRLKY-FILE-KEY\n
-     MOVE <3> TO TPFIRLKY-FILE-ID\n\n
-     EXEC CICS LINK\n
-        PROGRAM(TPFIRLKY)\n
-        COMMAREA(TPFIRLKY-AREA)\n
-        LENGTH(LENGTH OF TPFIRLKY-AREA)\n
-        RESP(WS-RESP)\n
-     END-EXEC\n\n
-     PERFORM R000-RESP-CODE-MAP-ONL\n \n
-   END-IF\n\n
-   MOVE WS-RESP-CD TO RTN-CODE\n",
+   MOVE WS-RESP-CD TO <4>\n",
   "cpybk" : 2
  },
 "DISKHOLD" : {
@@ -287,7 +291,7 @@
    END-EXEC\n\n
    EVALUATE TRUE\n
        WHEN WS-RESP = DFHRESP(NORMAL)\n
-       MOVE TPFIRDH-RTN-CODE TO RTNCD-CTL\n
+       MOVE TPFIRDH-RTN-CODE TO <4>\n
        WHEN OTHER\n
         display \"TODO:Error Processing to be performed\"\n
    END-EVALUATE\n",
@@ -307,7 +311,7 @@
    END-EXEC\n\n
    EVALUATE TRUE\n
        WHEN WS-RESP = DFHRESP(NORMAL)\n
-       MOVE TPFIRDH-RTN-CODE TO RTN-CODE\n
+       MOVE TPFIRDH-RTN-CODE TO <4>\n
        WHEN OTHER\n
        display \"TODO:Error Processing to be performed\"\n
    END-EVALUATE\n",
@@ -326,9 +330,9 @@
    END-EXEC\n\n
    EVALUATE TRUE\n
        WHEN WS-RESP = DFHRESP(NORMAL)\n
-       MOVE TPFIRLFN-RTN-CODE TO RTNCD\n
+       MOVE TPFIRLFN-RTN-CODE TO <2>\n
        WHEN OTHER\n
-       display \"TODO: Error Processing to be performed.\"\n 
+       display \"TODO: Error Processing to be performed.\"\n
    END-EVALUATE\n",
   "cpybk" : 0
  },
@@ -346,9 +350,9 @@
    END-EXEC\n
    EVALUATE TRUE\n
        WHEN WS-RESP = DFHRESP(NORMAL)\n
-       MOVE TPFIRLKY-RTN-CODE TO RTNCD\n
+       MOVE TPFIRLKY-RTN-CODE TO <2>\n
        WHEN OTHER\n
-       display \"TODO: Error Processing to be performed\"\n 
+       display \"TODO: Error Processing to be performed\"\n
    END-EVALUATE\n",
   "cpybk" : 0
  },
@@ -365,9 +369,9 @@
    END-EXEC\n
    EVALUATE TRUE\n
        WHEN WS-RESP = DFHRESP(NORMAL)\n
-       MOVE TPFISTAT-RTN-CODE TO RTN-CODE-X\n
+       MOVE TPFISTAT-RTN-CODE TO <2>\n
        WHEN OTHER\n
-       display \"TODO: Error Processing to be performed\"\n 
+       display \"TODO: Error Processing to be performed\"\n
    END-EVALUATE\n",
   "cpybk" : 0
  }
