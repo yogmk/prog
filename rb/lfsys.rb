@@ -8,7 +8,7 @@
 # are defined in the corrosponding file outside this program in
 # JSON format.
 #
-# author: yogesh kulkarni   (yogesh_m_kulkarni@xx.com)
+# author: yogesh kulkarni   (yogesh_m_kulkarni@dell.com)
 # created: 13.10.2014
 # 
 # modified:
@@ -25,7 +25,7 @@ $cob_kw =
 "END-MULTIPLY", "END-OF-PAGE", "END-PERFORM", "END-READ", "END-RECEIVE", "END-RETURN",
 "END-REWRITE", "END-SEARCH", "END-START", "END-STRING", "END-SUBTRACT", "END-UNSTRING",
 "END-WRITE", "END-XML", "ENTRY", "ERRCNT", "EVALUATE", "EXEC", "EXIT", "EXITDO",
-"FIND", "GO ", "GOTO", "GOBACK", "HEXPRINT", "IF", "INITIALIZE", "LIST", "MOVE", "MULTIPLY",
+"FIND", "GO", "GOTO", "GOBACK", "HEXPRINT", "IF", "INITIALIZE", "LIST", "MOVE", "MULTIPLY",
 "NEXT", "OPEN", "PERFORM", "PRINT", "READ", "RETURN", "REWRITE", "ROLLBACK", "SEARCH",
 "SET", "SORT", "SORT-MERGE", "SORT-RETURN", "START", "STOP", "STRING", "SUBSTITUTE",
 "SUBTRACT", "SUM", "TRANSLATE", "UNSTRING", "WHEN", "WRITE", "ABSOLUTE", "WHILE" ]
@@ -42,14 +42,14 @@ $ws_vars_common =
 # Lpad 12 spaces before writing.
 $ws_vars_05 = 
 [ "",
-" 05 WS-TPFILOG-PGM      PIC X(08) VALUE ‘TPFILOG ’.\n",
-" 05 KEY-RE72-PREV       PIC X(20).\n 05 WS-FILID-CTL-BR     PIC X(01).\n   88 STARTBR-FILID-CTL   VALUE ‘S’.\n   88 ENDBR-FILID-CTL   VALUE ‘E’.\n",
-" 05 CB300-RECORD-KEY-PREV  PIC X(26).\n 05 WS-FILE-ID-BR        PIC X(01).\n 88 STARTBR-FILE-ID     VALUE ‘S’.\n 88 ENDBR-FILE-ID       VALUE ‘E’.\n",
-" 05 TEMP-AHD-KEY-PREV   PIC X(24).\n 05 WS-TH-FILE-NAME-BR  PIC X(01).\n 88 STARTBR-TH-FILE-NAME   VALUE ‘S’.\n 88 ENDBR-TH-FILE-NAME    VALUE ‘E’.\n",
-" 05 WS-TPFIRDH-PGM      PIC X(08) VALUE ‘TPFIRDH ’.\n",
-" 05 WS-TPFIRLFN-PGM     PIC X(08) VALUE ‘TPFIRLFN’.\n",
-" 05 WS-TPFIRLKY-PGM     PIC X(08) VALUE ‘TPFIRLKY’.\n",
-" 05 WS-TPFISTAT-PGM     PIC X(08) VALUE ‘TPFISTAT’.\n" ]
+" 05 WS-TPFILOG-PGM      PIC X(08) VALUE 'TPFILOG '.\n",
+" 05 KEY-RE72-PREV       PIC X(20).\n 05 WS-FILID-CTL-BR     PIC X(01).\n   88 STARTBR-FILID-CTL   VALUE 'S'.\n   88 ENDBR-FILID-CTL   VALUE 'E'.\n",
+" 05 CB300-RECORD-KEY-PREV  PIC X(26).\n 05 WS-FILE-ID-BR        PIC X(01).\n 88 STARTBR-FILE-ID     VALUE 'S'.\n 88 ENDBR-FILE-ID       VALUE 'E'.\n",
+" 05 TEMP-AHD-KEY-PREV   PIC X(24).\n 05 WS-TH-FILE-NAME-BR  PIC X(01).\n 88 STARTBR-TH-FILE-NAME   VALUE 'S'.\n 88 ENDBR-TH-FILE-NAME    VALUE 'E'.\n",
+" 05 WS-TPFIRDH-PGM      PIC X(08) VALUE 'TPFIRDH '.\n",
+" 05 WS-TPFIRLFN-PGM     PIC X(08) VALUE 'TPFIRLFN'.\n",
+" 05 WS-TPFIRLKY-PGM     PIC X(08) VALUE 'TPFIRLKY'.\n",
+" 05 WS-TPFISTAT-PGM     PIC X(08) VALUE 'TPFISTAT'.\n" ]
 
 $ws_cb = [
 "",
@@ -109,12 +109,12 @@ def gather_call_parms( line, p )
     end
   else                         # we've past the USING phrase
     _line.split.each do |parm|
-      p << parm
+      p << parm.tr("\.", '')
     end
   end
   print "DEBUG: gather_call() > #{p}\n" 
 
-  $stmt_ends_in_dot = true if end_of_stmt?( _line )
+  $stmt_ends_in_dot = true if endof_curr_stmt?( _line )
 end
 
 def add_ws( old_fname, fd, mods )
@@ -159,14 +159,14 @@ def add_procdiv_code( mod, _parms, f )
   $code_hash[mod]["procdiv"].split("\n").each do |codeline|
     if codeline =~ /<[0-9]>/
       printf "DEBUG: codeline > %s <\n" % codeline
-      codeline.sub!( $&, _parms[$&.tr("<>", "").to_i] )
+      codeline.gsub!( $&, _parms[$&.tr("<>", "").to_i] )
       print "DEBUG: add_procdiv(): #{codeline}\n"
     end
     f.write( pad80( codeline ) )
   end
   
-  # The fullstop.
-  f.write( pad80( "." ) ) if $stmt_ends_in_dot
+  # The fullstop.  Area B!
+  f.write( pad80( "   ." ) ) if $stmt_ends_in_dot
   $stmt_ends_in_dot = false
 
 end
@@ -182,6 +182,7 @@ def add_copybooks( m, f )
   m.each do |mod| 
     if $code_hash[mod]["cpybk"] > last_idx
       idx = $code_hash[mod]["cpybk"]
+      last_idx = idx
     end
   end
 
@@ -193,7 +194,7 @@ def add_copybooks( m, f )
 end
 
 
-def end_of_stmt?( line )
+def endof_curr_stmt?( line )
   #check if the line has a fullstop (end of cobol sentence)
   code_section = line[7..71]
   if code_section =~ /\.[ \t]+/    #if it has a fullstop, then stmt ends here
@@ -204,7 +205,7 @@ def end_of_stmt?( line )
 end
 
 
-def start_of_stmt?( line )
+def startof_new_stmt?( line )
   #If first word on the line is one of the language keywords,
   #Then, this is the start of a new COBOL sentence.
 
@@ -282,7 +283,7 @@ def main(src_file)
         end
 
         ##if CALL ends in one line, it must have USING as above
-        if end_of_stmt?(line)      
+        if endof_curr_stmt?(line)      
             add_procdiv_code( foo, $parms, new_file )
             $parms.clear
             in_call_stmt = false
@@ -291,6 +292,7 @@ def main(src_file)
       else          # call stmt not of our interest
         new_file.write( line )
       end
+
       next  
     end
 
@@ -300,27 +302,28 @@ def main(src_file)
       ## end of current CALL stmt or a 
       ## begining of a new COBOL stmt
       ### because a '.' may not be there at the end.
-      if end_of_stmt?( line ) 
-        gather_call_parms( line, $parms )
-        printf "DEBUG: $parms > %s <\n" % $parms.to_s
-        new_file.write( pad80( _line, true, true) )
+
+      if startof_new_stmt?( line )
+        in_call_stmt = false
         add_procdiv_code( foo, $parms, new_file )
         $parms.clear
-        in_call_stmt = false
+        new_file.write( line )   #write back new line after adding proc div code.
         next
       end
 
-      if start_of_stmt?( line )
+      if endof_curr_stmt?( line ) 
+        gather_call_parms( line, $parms )
+        printf "DEBUG: $parms > %s <\n" % $parms.to_s
+        new_file.write( pad80( _line, true, true) )
         in_call_stmt = false
         add_procdiv_code( foo, $parms, new_file )
         $parms.clear
-
-        new_file.write( line )   #write back new line after adding proc div code.
-      else
-        in_call_stmt = true    #Still inside a CALL stmt
-        gather_call_parms( line, $parms)
-        new_file.write( pad80( _line, true, true) )
+        next
       end
+
+      in_call_stmt = true    #Still inside a CALL stmt
+      gather_call_parms( line, $parms)
+      new_file.write( pad80( _line, true, true) )
       next
     end
     
